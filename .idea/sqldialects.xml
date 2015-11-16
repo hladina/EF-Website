@@ -2,6 +2,5 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/EFWebsiteDB.sql" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/subject.sql" dialect="MySQL" />
   </component>
 </project>
