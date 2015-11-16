@@ -1,0 +1,1 @@
+-- This file is to fill the subject table with all the subjects of the school--
