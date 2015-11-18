@@ -1,7 +1,14 @@
 -- This file is to fill the subject Table in the EF_Website_DB --
 USE EF_Website_Database;
 
-Delete from subject;
+DROP TABLE subject;
+
+CREATE TABLE `subject` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
 
 INSERT INTO subject (name)
 VALUES ("Englisch");
@@ -10,7 +17,7 @@ INSERT INTO subject (name)
 VALUES ("Deutsch");
 
 INSERT INTO subject (name)
-VALUES ("Französisch");
+VALUES ("Franzoesisch");
 
 INSERT INTO subject (name)
 VALUES ("Algebra");
