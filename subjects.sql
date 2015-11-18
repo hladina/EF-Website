@@ -60,6 +60,15 @@ VALUES ("Geometrie");
 INSERT INTO subject (name)
 VALUES ("Algebra");
 
+INSERT INTO subject (name)
+VALUES ("Wirtschaft und Recht");
+
+INSERT INTO subject (name)
+VALUES ("Religion");
+
+INSERT INTO subject (name)
+VALUES ("Lebenskunde");
+
 
 
 
