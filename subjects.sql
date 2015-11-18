@@ -7,7 +7,7 @@ INSERT INTO subject (name)
 VALUES ("Deutsch");
 
 INSERT INTO subject (name)
-VALUES ("Franzoesisch");
+VALUES ("Franz&oumlsisch");
 
 INSERT INTO subject (name)
 VALUES ("Englisch");
@@ -40,7 +40,7 @@ INSERT INTO subject (name)
 VALUES ("Schwerpunktfach");
 
 INSERT INTO subject (name)
-VALUES ("Ergaenzungsfach");
+VALUES ("Erg&aumlnzungsfach");
 
 INSERT INTO subject (name)
 VALUES ("Sport");
