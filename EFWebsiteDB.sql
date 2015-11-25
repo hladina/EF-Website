@@ -40,6 +40,7 @@ CREATE TABLE `grade` (
 CREATE TABLE `question` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
+  `subject_id`int(11) DEFAULT NULL,
   `text` varchar(10000) DEFAULT NULL,
   `publish_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
@@ -62,6 +63,7 @@ CREATE TABLE `subject` (
 CREATE TABLE `summary` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
+  `subject_id` int(11) DEFAULT NULL,
   `file_name` varchar(30) NOT NULL,
   `file_type` varchar(30) NOT NULL,
   `file_size` int(11) NOT NULL,
@@ -88,3 +90,5 @@ alter TABLE grade add FOREIGN KEY (`subject_id`) REFERENCES subject(id);
 alter TABLE grade add FOREIGN KEY (`user_id`) REFERENCES user(id);
 alter TABLE question add FOREIGN KEY (`user_id`) REFERENCES user(id);
 alter TABLE summary add FOREIGN KEY (`user_id`) REFERENCES user(id);
+alter TABLE summary add FOREIGN KEY (`subject_id`) REFERENCES subject(id);
+alter TABLE question add FOREIGN KEY (`subject_id`) REFERENCES subject(id);
