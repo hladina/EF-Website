@@ -35,6 +35,21 @@ else {
 ?>
     <ul>
         <li>
+            Login
+            <form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+               Benutzername <input type="text" name="username"><br>
+                Passwort <input type="password" name="password"><br>
+                <input type="submit" name="login" value="Login"><br>
+            </form>
+            Registrieren
+            <form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>">
+                Benutzername <input type="text" name="username"><br>
+                Passwort <input type="password" name="password"><br>
+                Emailadresse <input type="email" name="email" ><br>
+                <input type="submit" name="register" value="Registrieren">
+            </form>
+        </li>
+        <li>
             <a href="#">Notenblatt</a>
         </li>
         <li>Forum
@@ -66,5 +81,10 @@ else {
             </ul>
         </li>
     </ul>
+<h1>Willkommen bei KollegiGuide</h1>
+<div id="news">
+    <h2>Neues vom Kollegi</h2>
+    <p>Diese Seite wurde vom Ergänzungsfach Informatik geschaffen viel Spass bei der Benutzung der Seite</p>
+</div>
 </body>
 </html>
