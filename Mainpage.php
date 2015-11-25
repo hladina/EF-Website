@@ -34,14 +34,14 @@ else {
 }
 ?>
     <ul>
-        <li>
-            Login
+        <li>Login
             <form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                Benutzername <input type="text" name="username"><br>
                 Passwort <input type="password" name="password"><br>
                 <input type="submit" name="login" value="Login"><br>
             </form>
-            Registrieren
+        </li>
+        <li>Registrieren
             <form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>">
                 Benutzername <input type="text" name="username"><br>
                 Passwort <input type="password" name="password"><br>
@@ -84,7 +84,64 @@ else {
 <h1>Willkommen bei KollegiGuide</h1>
 <div id="news">
     <h2>Neues vom Kollegi</h2>
-    <p>Diese Seite wurde vom Ergänzungsfach Informatik geschaffen viel Spass bei der Benutzung der Seite</p>
+    <h3>Lorem ipsum</h3>
+    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+        sed diam nonumy eirmod tempor invidunt ut labore et dolore
+        magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+        et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+        no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+        sed diam nonumy eirmod tempor invidunt ut labore et dolore
+        magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+        et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+        no sea takimata sanctus est Lorem ipsum dolor sit amet.
+    </p>
+    <p>
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+        sed diam nonumy eirmod tempor invidunt ut labore et dolore
+        magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+        et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+        no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+        sed diam nonumy eirmod tempor invidunt ut labore et dolore
+        magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+        et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+        no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+        sed diam nonumy eirmod tempor invidunt ut labore et dolore
+        magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+        et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+        no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        Duis autem vel eum iriure dolor in hendrerit in vulputate
+        velit esse molestie consequat, vel illum dolore eu feugiat
+        nulla facilisis at vero eros et accumsan et iusto odio dignissim
+        qui blandit praesent luptatum zzril delenit augue duis dolore
+        te feugait nulla facilisi. Lorem ipsum dolor sit amet,
+        consectetuer adipiscing elit, sed diam nonummy nibh
+        euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+    </p>
 </div>
+<div>
+    <h2>Ein anderer Inhalt</h2>
+    <p>jashfjasdhfadfaafs</p>
+</div>
+<div class="impressum">
+    KollegiGuide gemacht von EF-Informatik &copy 2015
+</div>
+<?php
+if(isset($_GET["login"])){
+    $inputUsername = $_GET["username"];
+    $userResult = $dbhandle->query("select * from user where username = $inputUsername ");
+    if($result === FALSE) {
+        die($dbhandle->error());
+    }
+    if ($result->num_rows == 1) {
+
+    }
+    else{
+        die();
+    }
+}
+?>
 </body>
 </html>
