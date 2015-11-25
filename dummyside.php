@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,10 +30,10 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         echo ("id: " . $row["id"]. " - Name: " . $row["name"].  "<br>");
     }
-} else {
+}
+else {
     echo "0 results";
 }
 ?>
 </body>
 </html>
-
