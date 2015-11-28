@@ -115,6 +115,22 @@ if(isset($_GET["login"])){
         die();
     }
 }
+else if ($_GET["register"]){
+    $inputUsername = $_GET["username"];
+    if($userResult === FALSE) {
+        die($dbhandle->error());
+    }
+    if ($userResult->num_rows > 0) {
+        while($row = $userResult->fetch_assoc() ){
+            if($inputUsername == $row["password"]){
+                echo "Eingeloggt";
+            }
+        }
+    }
+    else{
+        die();
+    }
+}
 ?>
 </body>
 </html>
