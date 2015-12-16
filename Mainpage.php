@@ -56,13 +56,13 @@ else {
         <li>Forum
             <ul>
                 <?php
-                /*foreach($subjects as $subject){
+                foreach($subjects as $subject){
                    echo("
                    <li>
                    <a href='dummyside.php?klasse=$subject'>".$subject."</a>
                    </li>
                    ");
-                }*/
+                }
                 ?>
             </ul>
         </li>
@@ -121,9 +121,9 @@ else if (isset($_GET["register"])){
     $username = $_GET["username"];
     $password = $_GET["password"];
     $email = $_GET["email"];
-    $klasse = $_GET["class"];
-    $sql = "INSERT INTO user (username ,password, email)
-    VALUES ('$username', '$password', '$email')";
+    $class = $_GET["class"];
+    $sql = "INSERT INTO user (username ,password, email,class)
+    VALUES ('$username', '$password', '$email', '$class')";
     if($dbhandle->query($sql)===true){
         echo "registred";
     }
