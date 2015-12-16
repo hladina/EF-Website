@@ -30,6 +30,7 @@ CREATE TABLE `grade` (
   `user_id` int(11) DEFAULT NULL,
   `subject_id` int(11) DEFAULT NULL,
   `mark` float DEFAULT NULL,
+  `factor` FLOAT DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ;
 
