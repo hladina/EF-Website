@@ -46,6 +46,7 @@ else {
                 Benutzername <input type="text" name="username"><br>
                 Passwort <input type="password" name="password"><br>
                 Emailadresse <input type="email" name="email" ><br>
+                Klasse<input type="text" name="class"><br>
                 <input type="submit" name="register" value="Registrieren">
             </form>
         </li>
@@ -115,22 +116,20 @@ if(isset($_GET["login"])){
         die();
     }
 }
-else if ($_GET["register"]){
-    $inputUsername = $_GET["username"];
-    if($userResult === FALSE) {
-        die($dbhandle->error());
-    }
-    if ($userResult->num_rows > 0) {
-        while($row = $userResult->fetch_assoc() ){
-            if($inputUsername == $row["password"]){
-                echo "Eingeloggt";
-            }
-        }
-    }
-    else{
-        die();
+
+else if (isset($_GET["register"])){
+    $username = $_GET["username"];
+    $password = $_GET["password"];
+    $email = $_GET["email"];
+    $klasse = $_GET["class"];
+    $sql = "INSERT INTO user (username ,password, email)
+    VALUES ('$username', '$password', '$email')";
+    if($dbhandle->query($sql)===true){
+        echo "registred";
     }
 }
+
+
 ?>
 </body>
 </html>
