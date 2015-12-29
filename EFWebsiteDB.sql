@@ -69,6 +69,7 @@ CREATE TABLE `summary` (
   `file_type` varchar(30) NOT NULL,
   `file_size` int(11) NOT NULL,
   `file_content` mediumblob NOT NULL,
+  `class` INTEGER DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ;
 

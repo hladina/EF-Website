@@ -57,11 +57,11 @@ else {
             <ul>
                 <?php
                 foreach($subjects as $subject){
-                   echo("
+                  /* echo("
                    <li>
                    <a href='dummyside.php?klasse=$subject'>".$subject."</a>
                    </li>
-                   ");
+                   ");*/
                 }
                 ?>
             </ul>
@@ -74,7 +74,7 @@ else {
                foreach($klassen as $klasse){
                    echo("
                    <li>
-                   <a href='dummyside.php?klasse=$klasse'>".$klasse."</a>
+                   <a href='summaries.php?klasse=$klasse'>".$klasse."</a>
                    </li>
                    ");
                }
@@ -109,6 +109,8 @@ if(isset($_GET["login"])){
         while($row = $userResult->fetch_assoc() ){
             if($inputUsername == $row["password"]){
                 echo "Eingeloggt";
+                $_SESSION["user"] = $row["id"];
+                echo $_SERVER["user"];
             }
         }
     }
