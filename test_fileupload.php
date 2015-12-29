@@ -44,13 +44,6 @@ if(isset($_POST['upload']) && $_FILES['userfile']['size'] > 0)
     $content = addslashes($content);
     fclose($fp);
 
-    if(!get_magic_quotes_gpc())
-    {
-        $fileName = addslashes($fileName);
-    }
-   /* include 'library/config.php';
-    include 'library/opendb.php';*/
-
     $sql = "INSERT INTO summary (name, size, type, content ) ".
         "VALUES ('$fileName', '$fileSize', '$fileType', '$content')";
 
