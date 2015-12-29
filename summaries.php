@@ -78,8 +78,9 @@ or die("Could not select subject");
     </li>
 </ul>
 <?php
-echo "Passed 1. if";
+
 if(isset($_GET["submit"])&& $_FILES['userfile']['size'] > 0){
+    echo "Passed 1. if";
     $fileName = $_FILES['userfile']['name'];
     $tmpName  = $_FILES['userfile']['tmp_name'];
     $fileSize = $_FILES['userfile']['size'];

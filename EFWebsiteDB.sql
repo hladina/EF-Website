@@ -65,10 +65,10 @@ CREATE TABLE `summary` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `subject_id` int(11) DEFAULT NULL,
-  `file_name` varchar(30) NOT NULL,
-  `file_type` varchar(30) NOT NULL,
-  `file_size` int(11) NOT NULL,
-  `file_content` mediumblob NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `type` varchar(30) NOT NULL,
+  `size` int(11) NOT NULL,
+  `content` mediumblob NOT NULL,
   `class` INTEGER DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ;
