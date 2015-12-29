@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
     <title>Dummyside</title>
 </head>
 <body>
@@ -27,34 +27,34 @@ or die("Could not select subject");
                 <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
                 <input name="userfile" type="file" id="userfile">
             </td>
-            <td width="80"><input name="upload" type="submit" class="box" id="upload" value=" Upload "></td>
+            <td>
+                <input name="upload" type="submit" class="box" id="upload" value="Upload">
+            </td>
         </tr>
     </table>
+</form>
 
 <?php
-if(isset($_POST['upload']) && $_FILES['userfile']['size'] > 0)
-{
-    $fileName = $_FILES['userfile']['name'];
-    $tmpName  = $_FILES['userfile']['tmp_name'];
-    $fileSize = $_FILES['userfile']['size'];
-    $fileType = $_FILES['userfile']['type'];
+echo "Hello 1";
+if (isset($_POST['upload'])){
+    echo "Hello 2";
+    if (isset($_FILES['userfile'])) {
+        $fileName = $_FILES['userfile']['name'];
+        $tmpName = $_FILES['userfile']['tmp_name'];
+        $fileSize = $_FILES['userfile']['size'];
+        $fileType = $_FILES['userfile']['type'];
 
-    $fp      = fopen($tmpName, 'r');
-    $content = fread($fp, filesize($tmpName));
-    $content = addslashes($content);
-    fclose($fp);
+        $content = base64_encode(file_get_contents($tmpName));
 
-    $sql = "INSERT INTO summary (name, size, type, content ) ".
-        "VALUES ('$fileName', '$fileSize', '$fileType', '$content')";
+        $sql = "INSERT INTO summary (name, size, type, content) " .
+            "VALUES ('$fileName', '$fileSize', '$fileType', '$content')";
 
-    if($dbhandle->query($sql)===true){
-        echo "uplpaded";
+        if ($dbhandle->query($sql) === true) {
+            echo "uploaded";
+        }
     }
-
 }
 ?>
 
-
-</form>
 </body>
 </html>
