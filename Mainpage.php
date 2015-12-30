@@ -7,6 +7,7 @@
 <body>
 <?php
 include "dbconfig.php";
+
 $result = $dbhandle->query("SELECT * FROM subject");
 //fetch tha data from the database
 if($result === FALSE) {
@@ -47,11 +48,11 @@ else {
             <ul>
                 <?php
                 foreach($subjects as $subject){
-                  /* echo("
+                   echo("
                    <li>
                    <a href='dummyside.php?klasse=$subject'>".$subject."</a>
                    </li>
-                   ");*/
+                   ");
                 }
                 ?>
             </ul>
@@ -89,37 +90,9 @@ else {
     KollegiGuide gemacht von EF-Informatik &copy 2015
 </div>
 <?php
-if(isset($_GET["login"])){
-    $inputUsername = $_GET["username"];
-    $userResult = $dbhandle->query("select * from user where username = '$inputUsername'");
-    if($userResult === FALSE) {
-        die($dbhandle->error());
-    }
-    if ($userResult->num_rows > 0) {
-        while($row = $userResult->fetch_assoc() ){
-            if($inputUsername == $row["password"]){
-                echo "Eingeloggt";
-                $_SESSION["user"] = $row["id"];
-                echo $_SERVER["user"];
-            }
-        }
-    }
-    else{
-        die();
-    }
-}
+include "login.php";
 
-else if (isset($_GET["register"])){
-    $username = $_GET["username"];
-    $password = $_GET["password"];
-    $email = $_GET["email"];
-    $class = $_GET["class"];
-    $sql = "INSERT INTO user (username ,password, email,class)
-    VALUES ('$username', '$password', '$email', '$class')";
-    if($dbhandle->query($sql)===true){
-        echo "registred";
-    }
-}
+include "register.php";
 
 
 ?>
