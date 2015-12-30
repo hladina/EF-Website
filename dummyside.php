@@ -7,7 +7,7 @@
 <body>
 <?php
 $username = "root";
-$password = "root";
+$password = "";
 $hostname = "localhost";
 
 //connection to the database

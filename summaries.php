@@ -6,22 +6,10 @@
 </head>
 <body>
 <?php
-$username = "root";
-$password = "";
-$hostname = "localhost";
-
-//connection to the database
-$dbhandle = new mysqli($hostname, $username, $password)
-or die("Unable to connect to MySQL");
-echo "Connected to MySQL<br>";
-//select a database to work with
-$selected = $dbhandle->select_db("EF_Website_Database")
-or die("Could not select subject");
-// Check connection
-//execute the SQL query and return records
+include "dbconfig.php";
 ?>
 <ul>
-    <li>Login
+   <li>Login
         <form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             Benutzername <input type="text" name="username"><br>
             Passwort <input type="password" name="password"><br>
@@ -56,12 +44,13 @@ or die("Could not select subject");
     <li>
         Zusammenfasseungen
         <ul>
-            <?php
-            $klassen = ["1. Klasse","2. Klasse","3. Klasse","4. Klasse","5. Klasse","6. Klasse"];
-            foreach($klassen as $klasse){
-                echo("
+           <?php
+
+           $klassen = ["1","2","3","4","5","6"];
+           foreach($klassen as $klasse){
+               echo("
                    <li>
-                   <a href='summaries.php?klasse=$klasse'>".$klasse."</a>
+                   <a href='summaries.php?klasse=$klasse'>".$klasse.". Klasse</a>
                    </li>
                    ");
             }
@@ -69,40 +58,79 @@ or die("Could not select subject");
         </ul>
     </li>
     <li>Zusammenfassung Hinzufügen
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
-            Titel <input type="text" name="title"><br>
-            File <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
-            <input name="userfile" type="file" id="userfile"> <br>
-            <input type="submit" name="submit" value="Hochladen">
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="MAX_FILE_SIZE" value="2000000"><br>
+            <input name="userfile" type="file" id="userfile" value="Datei auswählen"><br>
+            <select name="class">
+                <option name="1">1.Klasse</option>
+                <option name="2">2.Klasse</option>
+                <option name="3">3.Klasse</option>
+                <option name="4">4.Klasse</option>
+                <option name="5">5.Klasse</option>
+                <option name="6">6.Klasse</option>
+
+            </select>
+                <br>
+           <select name="subject">
+            <?php
+            $sql = "select * from subject";
+            $result = $dbhandle->query($sql);
+            if($result->num_rows > 0){
+                while($row = $result->fetch_assoc()){
+                    $name = $row["name"];
+                    $id = $row["id"];
+                    echo "<option value='$id'>" .$name. "</option>";
+                }
+            }
+            ?>
+               </select><br>
+            <input name="upload" type="submit" class="box" id="upload" value="Hochladen"><br>
         </form>
     </li>
 </ul>
 <?php
+if (isset($_POST['upload'])){
 
-if(isset($_GET["submit"])&& $_FILES['userfile']['size'] > 0){
-    echo "Passed 1. if";
-    $fileName = $_FILES['userfile']['name'];
-    $tmpName  = $_FILES['userfile']['tmp_name'];
-    $fileSize = $_FILES['userfile']['size'];
-    $fileType = $_FILES['userfile']['type'];
-    $fp      = fopen($tmpName, 'r');
-    $content = fread($fp, filesize($tmpName));
-    $content = addslashes($content);
-    fclose($fp);
-    include 'library/config.php';
-    include 'library/opendb.php';
-    if(!get_magic_quotes_gpc())
-    {
-        $fileName = addslashes($fileName);
+    if ($_FILES['userfile']['size']>0) {
+        $fileName = $_FILES['userfile']['name'];
+        $tmpName = $_FILES['userfile']['tmp_name'];
+        $fileSize = $_FILES['userfile']['size'];
+        $fileType = $_FILES['userfile']['type'];
+
+        $content = base64_encode(file_get_contents($tmpName));
+        $class = $_POST["class"];
+        $subject = $_POST["subject"];
+
+        $sql = "INSERT INTO summary (name, size, type, content, class, subject_id) " .
+            "VALUES ('$fileName', '$fileSize', '$fileType', '$content', '$class', '$subject')";
+
+        if ($dbhandle->query($sql) === true) {
+            echo "Ihr File wurde hochgeladen";
+        }
     }
+    else{
+        echo "Keine Datei ausgewählt";
+    }
+}
+$class = $_GET["klasse"];
+$sql = "SELECT id, name FROM summary WHERE class = $class";
+$result = $dbhandle->query($sql);
 
-    $query = "INSERT INTO upload (name, size, type, content ) ".
-        "VALUES ('$fileName', '$fileSize', '$fileType', '$content')";
+if($result === FALSE) {
+    echo "Error";
+    die($dbhandle->error());
+}
 
-    mysql_query($query) or die('Error, query failed');
-    include 'library/closedb.php';
-
-    echo "<br>File $fileName uploaded<br>";
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        $id = $row["id"];
+        $name = $row["name"];
+        echo "<a href='download.php?id=$id'>" . $name. "</a> <br>" ;
+    }
+}
+else {
+    echo "Keine Zusammenfassungen erhältlich";
 }
 ?>
 </body>
