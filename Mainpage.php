@@ -7,22 +7,7 @@
 <body>
 <?php
 include "dbconfig.php";
-
-$result = $dbhandle->query("SELECT * FROM subject");
-//fetch tha data from the database
-if($result === FALSE) {
-    die($dbhandle->error());
-}
-$subjects = [];
-if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        $subjects[] = $row["name"];
-    }
-}
-else {
-    echo "0 results";
-}
+include "subjectsFrom DB.php";
 ?>
     <ul>
         <li>Login
@@ -91,10 +76,7 @@ else {
 </div>
 <?php
 include "login.php";
-
 include "register.php";
-
-
 ?>
 </body>
 </html>

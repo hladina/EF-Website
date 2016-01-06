@@ -7,22 +7,7 @@
 <body>
 <?php
 include "dbconfig.php";
-
-$result = $dbhandle->query("SELECT * FROM subject");
-//fetch tha data from the database
-if($result === FALSE) {
-    die($dbhandle->error());
-}
-$subjects = [];
-if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        $subjects[] = $row["name"];
-    }
-}
-else {
-    echo "0 results";
-}
+include "subjectsFrom DB.php";
 ?>
 <ul>
     <li>Forum
@@ -107,28 +92,55 @@ if (isset($_POST['upload'])){
         }
     }
     else{
-        echo "Keine Datei ausgewählt";
+        echo "Keine Datei ausgewählt <br>";
     }
 }
-$class = $_GET["klasse"];
-$sql = "SELECT id, name FROM summary WHERE class = $class";
-$result = $dbhandle->query($sql);
 
+
+$result = $dbhandle->query("SELECT * FROM subject");
+//fetch tha data from the database
 if($result === FALSE) {
-    echo "Error";
     die($dbhandle->error());
 }
-
+$subjects = [];
+$subjects_id = [];
 if ($result->num_rows > 0) {
-    // output data of each row
+// output data of each row
     while($row = $result->fetch_assoc()) {
-        $id = $row["id"];
-        $name = $row["name"];
-        echo "<a href='download.php?id=$id'>" . $name. "</a> <br>" ;
+        $subjects[] = $row["name"];
+        $subjects_id[] = $row["id"];
     }
 }
 else {
-    echo "Keine Zusammenfassungen erhältlich";
+    echo "0 results";
+}
+
+$class = $_GET["klasse"];
+include "subjectsFrom DB.php";
+for($i = 0; $i < count($subjects_id); $i++) {
+    $id = $subjects_id[$i];
+    $sql = "SELECT id, name FROM summary WHERE class = $class AND subject_id = $id ";
+    $result = $dbhandle->query($sql);
+
+echo "<b>".$subjects[$i]. "</b><br>";
+
+    if ($result === FALSE) {
+        echo "Error";
+        die($dbhandle->error());
+    }
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            $id = $row["id"];
+            $name = $row["name"];
+
+
+            echo "<a href='download.php?id=$id'>" . $name. "</a> <br>";
+        }
+    } else {
+        echo "Keine Zusammenfassungen erhältlich <br>";
+    }
 }
 ?>
 </body>
