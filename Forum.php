@@ -8,6 +8,9 @@
 <?php
 include "dbconfig.php";
 
+    if(isset($_SESSION["user"])) {
+        echo "<a href='addPost.php'>Neuer Eintrag hinzufügen</a>";
+    }
 ?>
 </body>
 </html>

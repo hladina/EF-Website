@@ -8,6 +8,8 @@ if (isset($_GET["register"])){
     VALUES ('$username', '$password', '$email', '$class')";
     if($dbhandle->query($sql)===true){
         echo "registred";
+        $_SESSION["user"] = ["username"=> $username, "password" => $password, "email" => $email, "class" => $class];
     }
+
 }
 ?>

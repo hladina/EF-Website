@@ -9,8 +9,7 @@ if(isset($_GET["login"])){
         while($row = $userResult->fetch_assoc() ){
             if($inputUsername == $row["password"]){
                 echo "Eingeloggt";
-                $_SESSION["user"] = $row["id"];
-                echo $_SERVER["user"];
+                $_SESSION["user"] = $row;
             }
         }
     }

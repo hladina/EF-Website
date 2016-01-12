@@ -35,7 +35,7 @@ include "subjectsFrom DB.php";
                 foreach($subjects as $subject){
                    echo("
                    <li>
-                   <a href='dummyside.php?klasse=$subject'>".$subject."</a>
+                   <a href='Forum.php?subject=$subject'>".$subject."</a>
                    </li>
                    ");
                 }
